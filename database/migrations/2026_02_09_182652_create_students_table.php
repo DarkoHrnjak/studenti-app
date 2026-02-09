@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->varchar('ime');
-            $table->varchar('prezime');
-            $table->varchar('status',['redovni', 'izvanredni']);
+            $table->string('ime');
+            $table->string('prezime');
+            $table->enum('status',['redovni', 'izvanredni']);
             $table->integer('godiste');
             $table->decimal('prosjek', 3, 2);
             $table->timestamps();
