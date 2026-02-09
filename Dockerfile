@@ -7,7 +7,6 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip unzip git curl \
-    supervisor nginx \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
@@ -28,11 +27,8 @@ RUN composer install --no-dev --optimize-autoloader
 # Copy your nginx.conf
 COPY .fly/nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Copy Supervisor configuration
-COPY .fly/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Expose HTTP port
 EXPOSE 80
 
-# Start Supervisor (manages Nginx + PHP-FPM)
-CMD ["/usr/bin/supervisord", "-n"]
+
