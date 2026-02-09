@@ -3,14 +3,13 @@ app = "studenti-app-dh"
 [env]
 APP_ENV = "production"
 APP_DEBUG = "false"
-APP_KEY=base64:Q/7JENfgfSXK/z94Aopu/klT4jjMaGdAoZUSUUFJYCo=
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=studiranje
-DB_USERNAME=stud_user
-DB_PASSWORD=MyN3wStrongP@ss!
-
+APP_KEY = "base64:Q/7JENfgfSXK/z94Aopu/klT4jjMaGdAoZUSUUFJYCo="
+DB_CONNECTION = "mysql"
+DB_HOST = "127.0.0.1"
+DB_PORT = "3306"
+DB_DATABASE = "studiranje"
+DB_USERNAME = "stud_user"
+DB_PASSWORD = "MyN3wStrongP@ss!"
 
 [build]
   image = "dockerfile"
