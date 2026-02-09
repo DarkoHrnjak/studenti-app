@@ -1,0 +1,102 @@
+/* Reset some default styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+footer {
+    background-color: #eee;
+    text-align: center;
+    padding: 0.5rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+/* Buttons */
+button, a.button {
+    background-color: #4a90e2;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+button:hover, a.button:hover {
+    background-color: #357ABD;
+}
+
+form {
+    display: inline;
+}
+
+/* Form styles */
+input, select {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.2rem;
+    font-weight: bold;
+}
+
+input[type="submit"] {
+    background-color: #4a90e2;
+    color: white;
+    cursor: pointer;
+    width: auto;
+}
+
+input[type="submit"]:hover {
+    background-color: #357ABD;
+}
+
+/* Add spacing for Add New button */
+a.add-new {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
