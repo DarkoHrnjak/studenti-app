@@ -1,24 +1,38 @@
-# Dockerfile (use PHP 8.4)
+# Stage 1: PHP + Composer
 FROM php:8.4-fpm
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip unzip git curl \
+    supervisor nginx \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Set working directory
 WORKDIR /var/www/html
 
-RUN apt-get update && apt-get install -y \
-    libpng-dev libonig-dev libxml2-dev zip unzip git curl \
- && rm -rf /var/lib/apt/lists/*
-
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd xml
-
-# get composer
+# Copy composer binary from official composer image
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# allow composer to run as root in container
-ENV COMPOSER_ALLOW_SUPERUSER=1
-
+# Copy application code
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader
 
-EXPOSE 8080
+# Copy your nginx.conf
+COPY .fly/nginx/nginx.conf /etc/nginx/nginx.conf
 
-CMD ["php", "-S", "0.0.0.0:8080", "-t", "public"]
+# Copy Supervisor configuration
+COPY .fly/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Expose HTTP port
+EXPOSE 80
+
+# Start Supervisor (manages Nginx + PHP-FPM)
+CMD ["/usr/bin/supervisord", "-n"]
