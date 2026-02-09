@@ -15,7 +15,7 @@ DB_PASSWORD = "MyN3wStrongP@ss!"
   dockerfile = "Dockerfile"
 
 [[services]]
-  internal_port = 80
+  internal_port = 8080
   protocol = "tcp"
 
   [[services.ports]]
@@ -25,3 +25,4 @@ DB_PASSWORD = "MyN3wStrongP@ss!"
   [[services.ports]]
     port = 443
     handlers = ["tls", "http"]
+
