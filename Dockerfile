@@ -1,5 +1,8 @@
-# Stage 1: PHP + Composer
+# Use PHP 8.4 FPM
 FROM php:8.4-fpm
+
+# Set working directory
+WORKDIR /var/www/html
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -12,23 +15,17 @@ RUN apt-get update && apt-get install -y \
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Set working directory
-WORKDIR /var/www/html
-
-# Copy composer binary from official composer image
+# Copy composer from official image
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy application code
+# Copy project files
 COPY . .
 
-# Install dependencies
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Copy your nginx.conf
-COPY .fly/nginx/nginx.conf /etc/nginx/nginx.conf
-
-
-# Expose HTTP port
+# Expose port 80 (important: must match fly.toml)
 EXPOSE 80
 
-
+# Start PHP built-in server on port 80
+CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]
