@@ -25,7 +25,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Expose port 80 (important: must match fly.toml)
-EXPOSE 80
+EXPOSE 8080
 
 # Start PHP built-in server on port 80
-CMD ["php", "-S", "127.0.0.1:80", "-t", "public"]
+CMD ["php", "-S", "127.0.0.1:8080", "-t", "public"]
