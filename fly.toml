@@ -12,7 +12,7 @@ DB_USERNAME = "stud_user"
 DB_PASSWORD = "MyN3wStrongP@ss!"
 
 [build]
-  image = "dockerfile"
+  dockerfile = "Dockerfile"
 
 [[services]]
   internal_port = 80
