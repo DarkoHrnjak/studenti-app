@@ -1,0 +1,23 @@
+app = 'mysql-small-dew-8467'
+primary_region = 'fra'
+
+[build]
+  image = 'mysql:8.4'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 1024
+
+[processes]
+  app = """--datadir /data/mysql \
+    --mysql-native-password=ON"""
+
+[mounts]
+  source = "mysqldata"
+  destination = "/data"
+
+[env]
+  MYSQL_DATABASE = "studiranje"
+  MYSQL_USER = "stud_user"
