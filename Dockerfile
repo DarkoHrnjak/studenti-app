@@ -122,3 +122,34 @@ RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
 EXPOSE 8080
 
 ENTRYPOINT ["/entrypoint"]
+
+# Dockerfile
+FROM php:8.2-fpm
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    git \
+    curl
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy project files
+COPY . .
+
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
+
+# Copy entrypoint if you have one
+COPY .fly/entrypoint.sh /entrypoint
+RUN chmod +x /entrypoint
+
+CMD ["/entrypoint"]
